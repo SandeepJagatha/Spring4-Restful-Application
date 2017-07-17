@@ -2,8 +2,7 @@ The key interfaces used by the collections framework are List, Set and Map.
 
 The List and Set extends the Collection interface. Should not confuse the Collection interface with the Collections class which is a utility class.
 
-Alt-Set (HashSet , TreeSet) :
-------------------------------
+## Set (HashSet , TreeSet) :
 A Set is a collection with unique elements and prevents duplication within the collection. 
 HashSet and TreeSet are implementations of a Set interface.
 A TreeSet is an ordered HashSet, which implements the SortedSet interface.
