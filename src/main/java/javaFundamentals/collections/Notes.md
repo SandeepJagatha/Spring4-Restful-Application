@@ -117,8 +117,7 @@ rather caused by your java.util.Iterator (i.e. due to your it.next() call). You 
 Ans : The java.util.ListIterator is an iterator for lists that allows the programmer to traverse the list in either direction (i.e.
 forward and or backward) and modify the list during iteration.
 
-What are the benefits of the Java Collections Framework? Collections framework provides flexibility, performance,
-and robustness.
+### What are the benefits of the Java Collections Framework? Collections framework provides flexibility, performance, and robustness.
 * Polymorphic algorithms – sorting, shuffling, reversing, binary search etc.
 * Set algebra - such as finding subsets, intersections, and unions between objects.
 * Performance - collections have much better performance compared to the older Vector and Hashtable classes with
@@ -138,14 +137,17 @@ methods, they are an alternative to creating objects through constructors. Unlik
 not required to create a new object (i.e. a duplicate object) each time they are invoked (e.g. immutable instances can be
 cached) and also they have a more meaningful names like valueOf, instanceOf, asList etc. For example:
 
-```java
+
 Instead of:
+```java
 String[] myArray = {"Java", "J2EE", "XML", "JNDI"};
 for (int i = 0; i < myArray.length; i++) {
 	System.out.println(myArray[i]);
 }
+```
 
 You can use:
+```java
 String[] myArray = {"Java", "J2EE", "XML", "JNDI"};
 System.out.println(Arrays.asList(myArray)); //factory method Arrays.asList(…)
 ```
