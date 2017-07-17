@@ -7,7 +7,7 @@ A Set is a collection with unique elements and prevents duplication within the c
 HashSet and TreeSet are implementations of a Set interface.
 A TreeSet is an ordered HashSet, which implements the SortedSet interface.
 
-List (ArrayList, LinkedList, Vector etc) : 
+## List (ArrayList, LinkedList, Vector etc) : 
 A List is a collection with an ordered sequence of elements and may contain duplicates. 
 ArrayList, LinkedList and Vector are implementations of a List interface. (i.e. an index based).
 
@@ -18,17 +18,19 @@ A map can contain duplicate values, but the keys in a map must be distinct.
 HashMap, TreeMap and Hashtable are implementations of a Map interface. 
 A TreeMap is an ordered HashMap, which implements the SortedMap interface.
 
-Q. How to implement collection ordering? 
+### Q. How to implement collection ordering? 
 Ans: SortedSet and SortedMap interfaces maintain sorted order. The classes, which implement the Comparable interface, impose natural order. 
 By implementing Comparable, sorting an array of objects or a collection (List etc) is as simple as:
 
+```java
 Arrays.sort(myArray);
 Collections.sort(myCollection); // do not confuse “Collections” utility class with the “Collection” interface without an “s”.
+```
 
 For classes that don’t implement Comparable interface, or when one needs even more control over ordering based on
 multiple attributes, a Comparator interface should be used.
 
-Comparable interface::
+## Comparable interface::
 The “Comparable” allows itself to compare with another
 similar object (i.e. A class that implements Comparable
 becomes an object to be compared with). The method
@@ -37,17 +39,21 @@ compareTo() is specified in the interface.
 Many of the standard classes in the Java library like String, Integer, Date, File etc implement the Comparable interface
 to give the class a "Natural Ordering". For example String class uses the following methods:
 
+```java
 public int compareTo(o)
 public int compareToIgnoreCase(str)
+```
 
 You could also implement your own method in your
 own class as shown below:
 refer - ComparableDemo.java
 
-Comparator interface::
+## Comparator interface::
 The Comparator is used to compare two different objects. The following method is specified in the Comparator interface.
 
+```java
 public int compare(Object o1, Object o2)
+```
 
 You can have more control by writing your Comparator class. Let us write a Comparator for the Pet class shown on the left. For most cases
 natural ordering is fine as shown on the left but say we require a special scenario where we need to first sort by the “petId” and then by
@@ -55,8 +61,10 @@ the “petType”. We can achieve this by writing a “Comparator” class.
 refer - ComparatorDemo.java
 
 Important: The ordering imposed by a java.util.Comparator “myComp” on a set of elements “mySet” should be consistent with equals() method, which means for example:
+```java
 if compare(o1,o2) == 0 then o1.equals(o2) should be true.
 if compare(o1,o2) != 0 then o1.equals(o2) should be false.
+```
 
 If a comparator “myComp” on a set of elements “mySet” is inconsistent with equals() method, then SortedSet or SortedMap will behave strangely and is hard to debug. 
 For example if you add two objects o1, o2 to a TreeSet (implements SortedSet) such that o1.equals(o2) == true and compare(o1,o2) != 0 the second add operation will return
@@ -69,12 +77,12 @@ coding. Please refer to java.util.Comparator interface API for further details.
 +ve - 1st argument > 2nd  
 
 
-Q. What is an Iterator?
+### Q. What is an Iterator?
 Ans : An Iterator is a use once object to access the objects stored in a collection.
 Iterator design pattern (aka Cursor) is used, which is a behavioral design pattern that provides a way to access
 elements of a collection sequentially without exposing its internal representation.
 
-Q. Why do you get a ConcurrentModificationException when using an iterator?
+### Q. Why do you get a ConcurrentModificationException when using an iterator?
 Ans: The java.util Collection classes are fail-fast, which means that if one thread changes a collection while another
 thread is traversing it through with an iterator the iterator.hasNext() or iterator.next() call will throw
 ConcurrentModificationException. Even the synchronized collection wrapper classes SynchronizedMap and
@@ -105,24 +113,24 @@ exception “ConcurrentModificationException” when you tried to remove an obje
 with the intention of deleting that object from the underlying database. This exception is not caused by Hibernate but
 rather caused by your java.util.Iterator (i.e. due to your it.next() call). You can use one of the solutions given above.
 
-Q. What is a list iterator?
+### Q. What is a list iterator?
 Ans : The java.util.ListIterator is an iterator for lists that allows the programmer to traverse the list in either direction (i.e.
 forward and or backward) and modify the list during iteration.
 
 What are the benefits of the Java Collections Framework? Collections framework provides flexibility, performance,
 and robustness.
-> Polymorphic algorithms – sorting, shuffling, reversing, binary search etc.
-> Set algebra - such as finding subsets, intersections, and unions between objects.
-> Performance - collections have much better performance compared to the older Vector and Hashtable classes with
+* Polymorphic algorithms – sorting, shuffling, reversing, binary search etc.
+* Set algebra - such as finding subsets, intersections, and unions between objects.
+* Performance - collections have much better performance compared to the older Vector and Hashtable classes with
   the elimination of synchronization overheads.
-> Thread-safety - when synchronization is required, wrapper implementations are provided for temporarily
+* Thread-safety - when synchronization is required, wrapper implementations are provided for temporarily
   synchronizing existing collection objects. For J2SE 5.0 use java.util.concurrent package.
-> Immutability - when immutability is required wrapper implementations are provided for making a collection
+* Immutability - when immutability is required wrapper implementations are provided for making a collection
   immutable.
-> Extensibility - interfaces and abstract classes provide an excellent starting point for adding functionality and
+* Extensibility - interfaces and abstract classes provide an excellent starting point for adding functionality and
   features to create specialized object collections.
 
-Q. What are static factory methods?
+### Q. What are static factory methods?
 Ans : Some of the above mentioned features like searching, sorting, shuffling, immutability etc are achieved with
 java.util.Collections class and java.util.Arrays utility classes. The great majority of these implementations are provided
 via static factory methods in a single, non-instantiable (i.e. private constrctor) class. Speaking of static factory
@@ -130,6 +138,7 @@ methods, they are an alternative to creating objects through constructors. Unlik
 not required to create a new object (i.e. a duplicate object) each time they are invoked (e.g. immutable instances can be
 cached) and also they have a more meaningful names like valueOf, instanceOf, asList etc. For example:
 
+```java
 Instead of:
 String[] myArray = {"Java", "J2EE", "XML", "JNDI"};
 for (int i = 0; i < myArray.length; i++) {
@@ -139,14 +148,15 @@ for (int i = 0; i < myArray.length; i++) {
 You can use:
 String[] myArray = {"Java", "J2EE", "XML", "JNDI"};
 System.out.println(Arrays.asList(myArray)); //factory method Arrays.asList(…)
+```
 
 For example: The following static factory method (an alternative to a constructor) example converts a boolean primitive
 value to a Boolean wrapper object.
-
+```java
 public static Boolean valueOf(boolean b) {
 	return (b ? Boolean.TRUE : Boolean.FALSE)
 }
-
-https://stackoverflow.com/questions/929021/what-are-static-factory-methods
+```
+[what-are-static-factory-methods](https://stackoverflow.com/questions/929021/what-are-static-factory-methods)
 
 
