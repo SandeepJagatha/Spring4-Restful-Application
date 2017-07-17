@@ -46,7 +46,7 @@ public int compareToIgnoreCase(str)
 
 You could also implement your own method in your
 own class as shown below:
-refer - ComparableDemo.java
+`refer - ComparableDemo.java`
 
 ## Comparator interface::
 The Comparator is used to compare two different objects. The following method is specified in the Comparator interface.
@@ -72,9 +72,9 @@ false and will not be added to your set because o1 and o2 are equivalent from th
 TIP: It is always a good practice and highly recommended to keep the Java API documentation handy and refer to it as required while
 coding. Please refer to java.util.Comparator interface API for further details.
 
--ve - 1st argument < 2nd 
-0   - 1st argument = 2nd 
-+ve - 1st argument > 2nd  
+- -ve - 1st argument < 2nd 
+- 0   - 1st argument = 2nd 
+- +ve - 1st argument > 2nd  
 
 
 ### Q. What is an Iterator?
@@ -89,29 +89,33 @@ ConcurrentModificationException. Even the synchronized collection wrapper classe
 SynchronizedList are only conditionally thread-safe, which means all individual operations are thread-safe but compound
 operations where flow of control depends on the results of previous operations may be subject to threading issues.
 
-refer - ConcurrentModificationExceptionDemo.java
+`refer - ConcurrentModificationExceptionDemo.java`
 
-Solutions 1-3: for multi-thread access situation:
-Solution 1: You can convert your list to an array with list.toArray() and iterate on the array. This approach is not
+#### Solutions 1-3: for multi-thread access situation:
+**Solution 1:** You can convert your list to an array with list.toArray() and iterate on the array. This approach is not
 recommended if the list is large.
-Solution 2: You can lock the entire list while iterating by wrapping your code within a synchronized block. This approach
+**Solution 2:** You can lock the entire list while iterating by wrapping your code within a synchronized block. This approach
 adversely affects scalability of your application if it is highly concurrent.
-Solution 3: If you are using JDK 1.5 then you can use the ConcurrentHashMap and CopyOnWriteArrayList classes,
+**Solution 3:** If you are using JDK 1.5 then you can use the ConcurrentHashMap and CopyOnWriteArrayList classes,
 which provide much better scalability and the iterator returned by ConcurrentHashMap.iterator() will not throw
 ConcurrentModificationException while preserving thread-safety.
 
-Solution 4: for single-thread access situation:
+**Solution 4:** for single-thread access situation:
 Use:
+```java
 it.remove(); // removes the current object via the Iterator “it” which has a reference to
 // your underlying collection “myCollection”. Also can use solutions 1-3.
+```
 Avoid:
+```java
 myCollection.remove(myObject); // avoid by-passing the Iterator. When it.next() is called, can throw the exception
 // ConcurrentModificationException
+```
 
-Note: If you had used any Object to Relational (OR) mapping frameworks like Hibernate, you may have encountered this
+**Note:** `If you had used any Object to Relational (OR) mapping frameworks like Hibernate, you may have encountered this
 exception “ConcurrentModificationException” when you tried to remove an object from a collection such as a java.util Set
 with the intention of deleting that object from the underlying database. This exception is not caused by Hibernate but
-rather caused by your java.util.Iterator (i.e. due to your it.next() call). You can use one of the solutions given above.
+rather caused by your java.util.Iterator (i.e. due to your it.next() call). You can use one of the solutions given above.`
 
 ### Q. What is a list iterator?
 Ans : The java.util.ListIterator is an iterator for lists that allows the programmer to traverse the list in either direction (i.e.
