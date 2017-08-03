@@ -13,6 +13,7 @@ Ans :
 	classes like ArrayList, HashMap etc must grow periodically to accommodate new elements. But if you have a
 	very large array, and you know the size in advance then you can speed things up by setting the initial size
 	appropriately.
+	
 	For example: HashMaps/Hashtables need to be created with sufficiently large capacity to minimize
 	rehashing (which happens every time the table grows). HashMap has two parameters initial capacity and
 	load factor that affect its performance and space requirements. Higher load factor values (default load factor
